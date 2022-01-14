@@ -18,7 +18,24 @@ class AuthController extends Controller
 
     public function loginStore(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        $user = User::whereEmail($request->email)->first();
+
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                Auth::login($user);
+
+                return redirect('/');
+            }
+        }
+
+        throw ValidationException::withMessages([
+            'email' => 'Email atau password salah!'
+        ]);
     }
 
     public function register()
