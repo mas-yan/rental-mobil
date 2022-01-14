@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     });
+
+    Route::get('/brand', [BrandController::class, 'index']);
 });
 
 Route::middleware('guest')->group(function () {

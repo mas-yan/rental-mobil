@@ -16,24 +16,24 @@
         <li class="sidebar-title">Menu</li>
         
         <li
-            class="sidebar-item active ">
-            <a href="index.html" class='sidebar-link'>
+            class="sidebar-item {{Request::is('/')?'active':''}} ">
+            <a href="/" class='sidebar-link {{Request::is('/')?'active':''}}'>
                 <i class="bi bi-grid-fill"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         
-        <li class="sidebar-title">Forms &amp; Tables</li>
+        <li class="sidebar-title">Master Data</li>
         
         <li
-            class="sidebar-item  has-sub">
+            class="sidebar-item {{Request::is('brand')?'active':''}} has-sub">
             <a href="#" class='sidebar-link'>
-                <i class="bi bi-hexagon-fill"></i>
-                <span>Form Elements</span>
+                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                <span>Master Data</span>
             </a>
-            <ul class="submenu ">
-                <li class="submenu-item ">
-                    <a href="form-element-input.html">Input</a>
+            <ul class="submenu {{Request::is('brand')?'active':''}}">
+                <li class="submenu-item {{Request::is('brand')?'active':''}}">
+                    <a href="brand">Data Brand</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="form-element-input-group.html">Input Group</a>
