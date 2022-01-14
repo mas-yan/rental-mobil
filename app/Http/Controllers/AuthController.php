@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -24,20 +26,9 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function registerStore(Request $request)
+    public function registerStore(RegistrationRequest $request)
     {
-        $request->validate([
-            'email' => ['required', 'unique:users', 'email'],
-            'name' => ['required', 'string', 'min:3'],
-            'password' => ['required', 'min:8', 'confirmed'],
-        ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-
+        User::create($request->all());
         return redirect()->route('login')->with('success', 'Berhasil Register, Silahkan Login!');
     }
 }
