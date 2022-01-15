@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
     @yield('style')
 </head>
 
@@ -28,20 +29,20 @@
                 </a>
             </header>
             
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>@yield('page-header')</h3>
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>@yield('page-header')</h3>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                    </div>
+                </div>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-            </div>
+            <section class="section">
+                        @yield('main')
+            </section>
         </div>
-    </div>
-    <section class="section">
-                @yield('main')
-    </section>
-</div>
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
@@ -55,6 +56,33 @@
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/mazer.js"></script>
+    <script src="assets/vendors/toastify/toastify.js"></script>
+
+    @if (session()->has('success'))
+
+    <script>
+        Toastify({
+            text: "{{session()->get('success')}}",
+            duration: 3000,
+            close:true,
+            gravity:"top",
+            position: "left",
+            backgroundColor: "#4fbe87",
+        }).showToast();
+    </script>
+    @elseif (session()->has('error'))
+
+    <script>
+        Toastify({
+            text: "{{session()->get('error')}}",
+            duration: 3000,
+            close:true,
+            gravity:"top",
+            position: "left",
+            backgroundColor: "#dd3647",
+        }).showToast();
+    </script>
+    @endif
 
     @yield('script')
 </body>

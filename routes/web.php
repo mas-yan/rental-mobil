@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/brand', [BrandController::class, 'index']);
+    Route::post('/brand', [BrandController::class, 'store'])->name('addBrand');
+    Route::delete('/brand/{brand}', [BrandController::class, 'destroy'])->name('deleteBrand');
 });
 
 Route::middleware('guest')->group(function () {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\brand;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -14,7 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand = brand::get();
+        $brand = Brand::get();
         return view('brand.index', compact('brand'));
     }
 
@@ -36,7 +36,15 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required']
+        ]);
+
+        Brand::create([
+            'brand_name' => $request->name
+        ]);
+
+        return redirect('/brand')->with('success', 'Data Brand Berhasil Ditambahkan!');
     }
 
     /**
@@ -45,7 +53,7 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(brand $brand)
+    public function show(Brand $brand)
     {
         //
     }
@@ -56,7 +64,7 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(brand $brand)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -68,7 +76,7 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brand $brand)
+    public function update(Request $request, Brand $brand)
     {
         //
     }
@@ -79,8 +87,14 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brand $brand)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+
+        if ($brand) {
+            return redirect('/brand')->with('success', 'Data Brand Berhasil dihapus!');
+        } else {
+            return redirect('/brand')->with('error', 'Data Brand Gagal dihapus!');
+        }
     }
 }
