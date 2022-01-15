@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\MobilController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/brand', [BrandController::class, 'store'])->name('addBrand');
     Route::delete('/brand/{brand}', [BrandController::class, 'destroy'])->name('deleteBrand');
     Route::resource('cars', MobilController::class);
+    Route::resource('clients', ClientsController::class);
 });
 
 Route::middleware('guest')->group(function () {
