@@ -89,6 +89,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        dd($brand);
         $brand->delete();
 
         if ($brand) {

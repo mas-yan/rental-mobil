@@ -26,17 +26,17 @@
         <li class="sidebar-title">Master Data</li>
         
         <li
-            class="sidebar-item {{Request::is('brand')?'active':''}} has-sub">
+            class="sidebar-item {{Request::is('brand') || Request::is('cars*') ?'active':''}} has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                 <span>Master Data</span>
             </a>
-            <ul class="submenu {{Request::is('brand')?'active':''}}">
+            <ul class="submenu {{Request::is('brand') || Request::is('cars*') ?'active':''}}">
                 <li class="submenu-item {{Request::is('brand')?'active':''}}">
-                    <a href="brand">Data Brand</a>
+                    <a href="{{route('brand')}}">Data Brand</a>
                 </li>
-                <li class="submenu-item ">
-                    <a href="form-element-input-group.html">Input Group</a>
+                <li class="submenu-item {{Request::is('cars*')?'active':''}}">
+                    <a href="{{route('cars.index')}}">Data Mobil</a>
                 </li>
                 <li class="submenu-item ">
                     <a href="form-element-select.html">Select</a>

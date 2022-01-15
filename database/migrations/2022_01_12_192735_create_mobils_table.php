@@ -20,6 +20,7 @@ class CreateMobilsTable extends Migration
             $table->string('car_name', 100);
             $table->string('plat_number', 100);
             $table->bigInteger('price');
+            $table->enum('type', ['manual', 'matic']);
             $table->boolean('available')->default(true);
             $table->timestamps();
         });

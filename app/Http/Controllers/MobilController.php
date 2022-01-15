@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MobilRequest;
+use App\Models\Brand;
 use App\Models\Mobil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MobilController extends Controller
 {
@@ -14,7 +17,8 @@ class MobilController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Mobil::with('brand')->get();
+        return view('cars.index', compact('cars'));
     }
 
     /**
@@ -24,7 +28,8 @@ class MobilController extends Controller
      */
     public function create()
     {
-        //
+        $brands = Brand::get();
+        return view('cars.create', compact('brands'));
     }
 
     /**
@@ -33,9 +38,10 @@ class MobilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MobilRequest $request)
     {
-        //
+        Mobil::create($request->all());
+        return redirect('/cars')->with('success', 'Data Mobil Berhasil Ditambahkan!');
     }
 
     /**
@@ -46,7 +52,7 @@ class MobilController extends Controller
      */
     public function show(Mobil $mobil)
     {
-        //
+        // 
     }
 
     /**
@@ -55,9 +61,11 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mobil $mobil)
+    public function edit($id)
     {
-        //
+        $brands = Brand::get();
+        $mobil = Mobil::find($id);
+        return view('cars.edit', compact('brands', 'mobil'));
     }
 
     /**
@@ -67,9 +75,23 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mobil $mobil)
+    public function update(MobilRequest $request, $id)
     {
-        //
+        $mobil = Mobil::find($id);
+        $foto = $request->file('foto');
+        if ($foto == '') {
+            $mobil->update([
+                'brand_id' => $request->brand_id,
+                'car_name' => $request->car_name,
+                'plat_number' => $request->plat_number,
+                'price' => $request->price,
+                'type' => $request->type,
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/mobil/' . basename($mobil->foto));
+            $mobil->update($request->all());
+        }
+        return redirect('/cars')->with('success', 'Data Mobil Berhasil Diubah!');
     }
 
     /**
@@ -78,8 +100,10 @@ class MobilController extends Controller
      * @param  \App\Models\Mobil  $mobil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mobil $mobil)
+    public function destroy($id)
     {
-        //
+        $mobil = Mobil::find($id);
+        $mobil->delete();
+        return redirect('/cars')->with('success', 'Data Mobil Berhasil Dihapus!');
     }
 }

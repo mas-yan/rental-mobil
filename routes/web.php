@@ -21,9 +21,10 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     });
 
-    Route::get('/brand', [BrandController::class, 'index']);
+    Route::get('/brand', [BrandController::class, 'index'])->name('brand');
     Route::post('/brand', [BrandController::class, 'store'])->name('addBrand');
     Route::delete('/brand/{brand}', [BrandController::class, 'destroy'])->name('deleteBrand');
+    Route::resource('cars', MobilController::class);
 });
 
 Route::middleware('guest')->group(function () {
