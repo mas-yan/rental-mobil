@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ClientsController extends Controller
 {
@@ -47,7 +50,7 @@ class ClientsController extends Controller
         ]);
 
         Clients::create($request->all());
-        return redirect('/clients')->with('success', 'Data Penyewa Berhasil Dihapus!');
+        return redirect('/clients')->with('success', 'Data Penyewa Berhasil Ditambah!');
     }
 
     /**
@@ -67,9 +70,10 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clients $clients)
+    public function edit($id)
     {
-        dd($clients);
+        $client = Clients::find($id);
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -79,9 +83,37 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clients $clients)
+    public function update(Request $request, $id)
     {
-        //
+        $client = Clients::find($id);
+        $request->validate([
+            'foto' => ['image'],
+            'nik' => [
+                'required',
+                Rule::unique('clients')->ignore($client->nik, 'nik')
+            ],
+            'name' => ['required'],
+            'gender' => ['required'],
+            'date_of_birth' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required'],
+        ]);
+        $foto = $request->file('foto');
+        if ($foto == '') {
+            $client->update([
+                'name' => $request->name,
+                'car_name' => $request->car_name,
+                'plat_number' => $request->plat_number,
+                'gender' => $request->gender,
+                'date_of_birth' => $request->date_of_birth,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+        } else {
+            Storage::disk('local')->delete('public/client/' . basename($client->foto));
+            $client->update($request->all());
+        }
+        return redirect('/clients')->with('success', 'Data client Berhasil Diubah!');
     }
 
     /**
@@ -90,8 +122,11 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clients $clients)
+    public function destroy($id)
     {
-        //
+        $client = Clients::find($id);
+        Storage::disk('local')->delete('public/client/' . basename($client->foto));
+        $client->delete();
+        return redirect('/clients')->with('success', 'Data Penyewa Berhasil Dihapus!');
     }
 }
