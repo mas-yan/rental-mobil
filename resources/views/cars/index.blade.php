@@ -1,6 +1,6 @@
 @extends('layout.app.index')
-@section('page-header','Master Data Brand')
-@section('title','Brand')
+@section('page-header','Master Data Mobil')
+@section('title','Mobil')
 @section('style')
     
 <link rel="stylesheet" href="assets/vendors/jquery-datatables/jquery.dataTables.bootstrap5.min.css">
