@@ -46,6 +46,7 @@ class BookingController extends Controller
             'total_price' => $request->total_price,
             'mobil_id' => $request->car_id,
             'client_id' => $request->client_id,
+            'total_price' => $request->total_price,
         ]);
         $car = Mobil::find($request->car_id);
         $car->available = '0';

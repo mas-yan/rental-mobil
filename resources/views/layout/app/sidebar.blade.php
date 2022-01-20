@@ -44,13 +44,13 @@
                     </ul>
                 </li>
                 <li
-                    class="sidebar-item {{Request::is('booking') || Request::is('return*') ?'active':''}} has-sub">
+                    class="sidebar-item {{Request::is('booking') || Request::is('return*') || Request::is('process') ?'active':''}} has-sub">
                     <a href="#" class='sidebar-link'>
                         <dt class="the-icon"><span class="fa-fw select-all fas"></span></dt>
                         <span>Transaksi</span>
                     </a>
-                    <ul class="submenu {{Request::is('booking') || Request::is('return*') ?'active':''}}">
-                        <li class="submenu-item {{Request::is('booking')?'active':''}}">
+                    <ul class="submenu {{Request::is('booking') || Request::is('return*') || Request::is('process') ?'active':''}}">
+                        <li class="submenu-item {{Request::is('booking') || Request::is('process') ?'active':''}}">
                             <a href="{{route('booking')}}">Booking</a>
                         </li>
                         <li class="submenu-item {{Request::is('return*')?'active':''}}">

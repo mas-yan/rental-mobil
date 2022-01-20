@@ -107,19 +107,65 @@
       </div>
     </div>
   </div>
-  <form action="{{route('confirm')}}" method="POST">
-    @csrf
-    <input type="hidden" name="client_id" value="{{$client->id}}">
-    <input type="hidden" name="car_id" value="{{$car->id}}">
-    <input type="hidden" name="booking_code" value="{{$data['kode']}}">
-    <input type="hidden" name="order_date" value="{{$data['order_date']}}">
-    <input type="hidden" name="duration" value="{{$data['duration']}}">
-    <input type="hidden" name="return_date_supposed" value="{{$return_date}}">
-    <input type="hidden" name="total_price" value="{{$total_price}}">
-    <div class="d-grid gap-2">
-      <button class="btn btn-primary" type="submit">Konfirmasi Rental Mobil</button>
+  <div class="d-grid gap-2">
+    <button class="btn btn-primary" data-bs-toggle="modal"
+    data-bs-target="#border-less">Konfirmasi Rental Mobil</button>
+  </div>
+
+  <div class="modal fade text-left modal-borderless" id="border-less" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pembayaran</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form action="{{route('confirm')}}" method="POST">
+                @csrf
+                <input type="hidden" name="client_id" value="{{$client->id}}">
+                <input type="hidden" name="car_id" value="{{$car->id}}">
+                <input type="hidden" name="booking_code" value="{{$data['kode']}}">
+                <input type="hidden" name="order_date" value="{{$data['order_date']}}">
+                <input type="hidden" name="duration" value="{{$data['duration']}}">
+                <input type="hidden" name="return_date_supposed" value="{{$return_date}}">
+                <input type="hidden" name="total_price" value="{{$total_price}}">
+                <input type="hidden" name="car_id" value="{{$car->id}}">
+                <div class="form-group">
+                  <label for="kode">Kode Booking</label>
+                <input type="text" readonly name="kode" value="M-{{rand()}}" class="form-control" id="kode">
+              </div>
+              <div class="form-group">
+                <p>Paid Type</p>
+                <select name="type" required class="form-control">
+                    <option disabled selected value=""> - Select One - </option>
+                    <option value="dp">DP</option>
+                    <option value="repayment">Repayment</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <p>Amount</p>
+                <input type="number" name="amount" required class="form-control" min="{{$pay}}" max="{{$total_price}}" placeholder="Bayar" value="{{ old('amount') }}">
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
+                <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                  </button>
+                  <button type="submit" class="btn btn-primary ml-1">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Proses</span>
+                  </button>
+                </form>
+            </div>
+        </div>
     </div>
-</form>
+  </div>
 </div>
 @endsection
 @section('script')
