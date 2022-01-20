@@ -21,7 +21,7 @@
     <div class="col-lg-7 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo"></a>
+                <h2 class="text-primary">Rental Mobil</h2>
             </div>
             @yield('content')
         </div>

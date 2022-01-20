@@ -4,7 +4,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="index.html"><img src="{{asset('assets/images/logo/logo.png')}}" alt="Logo" srcset=""></a>
+                    <h2 class="text-primary">Rental Mobil</h2>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -44,11 +44,19 @@
                     </ul>
                 </li>
                 <li
-                    class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Form Layout</span>
+                    class="sidebar-item {{Request::is('booking') || Request::is('return*') ?'active':''}} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <dt class="the-icon"><span class="fa-fw select-all fas"></span></dt>
+                        <span>Transaksi</span>
                     </a>
+                    <ul class="submenu {{Request::is('booking') || Request::is('return*') ?'active':''}}">
+                        <li class="submenu-item {{Request::is('booking')?'active':''}}">
+                            <a href="{{route('booking')}}">Booking</a>
+                        </li>
+                        <li class="submenu-item {{Request::is('return*')?'active':''}}">
+                            <a href="#">Return</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
