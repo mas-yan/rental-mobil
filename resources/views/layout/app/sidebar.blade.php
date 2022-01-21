@@ -58,6 +58,18 @@
                         </li>
                     </ul>
                 </li>
+                <li
+                    class="sidebar-item {{Request::is('report') ?'active':''}} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <dt class="the-icon"><span class="fa-fw select-all fas"></span></dt>
+                        <span>Laporan</span>
+                    </a>
+                    <ul class="submenu {{Request::is('report') ?'active':''}}">
+                        <li class="submenu-item {{Request::is('report') ?'active':''}}">
+                            <a href="{{route('report')}}">Data Transaksi</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

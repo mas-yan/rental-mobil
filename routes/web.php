@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\MobilController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/return', [BookingController::class, 'return'])->name('returns');
     Route::post('/return', [BookingController::class, 'store'])->name('returns');
     Route::get('/return/{booking}', [BookingController::class, 'show'])->name('returns.show');
+
+    // report
+    Route::get('/report', ReportController::class)->name('report');
+    Route::post('/report', ReportController::class)->name('report');
 });
 
 Route::middleware('guest')->group(function () {
