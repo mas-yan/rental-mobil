@@ -18,11 +18,16 @@
         </span>
     @enderror
     <div class="form-group position-relative has-icon-left mt-3 mb-0">
-        <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
+        <input type="password" name="password" class="form-control form-control-xl @error('password') is-invalid @enderror" placeholder="Password">
         <div class="form-control-icon">
             <i class="bi bi-shield-lock"></i>
         </div>
     </div>
+    @error('password')
+        <span class="text-danger">
+            <small>{{$message}}</small>
+        </span>
+    @enderror
     <button class="btn btn-primary btn-block btn-lg shadow-lg mt-3">Log in</button>
 </form>
 <div class="text-center mt-5 text-lg fs-4">
