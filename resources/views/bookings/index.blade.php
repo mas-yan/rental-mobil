@@ -6,7 +6,7 @@
 @endsection
 @section('main')
 <div class="row">
-  @foreach ($cars as $car)
+  @forelse ($cars as $car)
     <div class="col-md-4">
       <div class="card">
         <div class="card-content">
@@ -76,7 +76,11 @@
           </div>
       </div>
     </div>
-    @endforeach
+    @empty
+        <div class="alert alert-danger">
+          Belum ada mobil untuk direntalkan
+        </div>
+    @endforelse
 </div>
 @endsection
 @section('script')

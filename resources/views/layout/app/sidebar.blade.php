@@ -54,7 +54,7 @@
                             <a href="{{route('booking')}}">Booking</a>
                         </li>
                         <li class="submenu-item {{Request::is('return*')?'active':''}}">
-                            <a href="#">Return</a>
+                            <a href="{{route('returns')}}">Return</a>
                         </li>
                     </ul>
                 </li>

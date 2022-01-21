@@ -21,7 +21,10 @@ class CreateBookingsTable extends Migration
             $table->date('tanggal_order');
             $table->integer('durasi');
             $table->date('tanggal_pengembalian');
-            $table->date('dikembalikan');
+            $table->date('dikembalikan')->nullable();
+            $table->enum('type', ['dp', 'repayment']);
+            $table->bigInteger('denda')->nullable();
+            $table->bigInteger('dibayar')->nullable();
             $table->bigInteger('total_price');
             $table->timestamps();
         });
