@@ -131,7 +131,7 @@
                 <input type="hidden" name="booking_code" value="{{$data['kode']}}">
                 <input type="hidden" name="order_date" value="{{$data['order_date']}}">
                 <input type="hidden" name="duration" value="{{$data['duration']}}">
-                <input type="hidden" name="return_date_supposed" value="{{$return_date}}">
+                <input type="hidden" name="tanggal_pengembalian" value="{{$return_date}}">
                 <input type="hidden" name="total_price" value="{{$total_price}}">
                 <input type="hidden" name="car_id" value="{{$car->id}}">
                 <div class="form-group">

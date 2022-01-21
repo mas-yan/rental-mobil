@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/booking', [BookingController::class, 'index'])->name('booking');
     Route::post('/process', [BookingController::class, 'process'])->name('process');
     Route::post('/confirm', [BookingController::class, 'confirm'])->name('confirm');
+
+    // return
+    Route::get('/return', [BookingController::class, 'return'])->name('returns');
+    Route::post('/return', [BookingController::class, 'store'])->name('returns');
+    Route::get('/return/{booking}', [BookingController::class, 'show'])->name('returns.show');
 });
 
 Route::middleware('guest')->group(function () {
