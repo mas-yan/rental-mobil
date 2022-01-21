@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+
+    Route::get('/', DashboardController::class);
 
     // brand
     Route::get('/brand', [BrandController::class, 'index'])->name('brand');

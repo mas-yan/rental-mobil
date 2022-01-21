@@ -76,7 +76,7 @@
                             @csrf
                             <div class="d-grid gap-2">
                                 <button class="btn sidebar-link">
-                                    <i class="bi bi-grid-fill"></i>
+                                    <dt class="the-icon"><span class="fa-fw select-all fas"></span></dt>
                                     <span>Logout</span>
                                 </button>
                             </div>
