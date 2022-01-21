@@ -24,9 +24,12 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     });
 
+    // brand
     Route::get('/brand', [BrandController::class, 'index'])->name('brand');
     Route::post('/brand', [BrandController::class, 'store'])->name('addBrand');
     Route::delete('/brand/{brand}', [BrandController::class, 'destroy'])->name('deleteBrand');
+
+    // mobil
     Route::resource('cars', MobilController::class);
     Route::resource('clients', ClientsController::class);
 
@@ -43,6 +46,9 @@ Route::middleware('auth')->group(function () {
     // report
     Route::get('/report', ReportController::class)->name('report');
     Route::post('/report', ReportController::class)->name('report');
+
+    // logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('guest')->group(function () {

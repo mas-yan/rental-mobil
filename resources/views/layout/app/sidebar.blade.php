@@ -70,6 +70,18 @@
                         </li>
                     </ul>
                 </li>
+                <li
+                    class="sidebar-item">
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            <div class="d-grid gap-2">
+                                <button class="btn sidebar-link">
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </form>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

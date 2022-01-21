@@ -48,4 +48,11 @@ class AuthController extends Controller
         User::create($request->all());
         return redirect()->route('login')->with('success', 'Berhasil Register, Silahkan Login!');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        return redirect('/');
+    }
 }
