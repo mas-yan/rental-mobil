@@ -23,7 +23,11 @@ class DashboardController extends Controller
         $rental = Mobil::where('available', 0)->count();
 
         $date = Carbon::now();
-        $denda = Booking::whereMonth('created_at', $date->format('m'))->where('denda', '!=', null)->whereYear('created_at', $date->format('Y'))->groupBy('denda')->count();
+        $denda = Booking::whereMonth('created_at', $date->format('m'))
+            ->where('denda', '!=', null)
+            ->whereYear('created_at', $date->format('Y'))
+            ->groupBy('denda')
+            ->count();
 
         $chart = Booking::select(DB::raw('sum(total_price) as `data`'), DB::raw('MONTH(tanggal_order) month'))
             ->where('dikembalikan', '!=', null)
